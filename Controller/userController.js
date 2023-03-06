@@ -143,7 +143,9 @@ const { id } = req.params
     User.findOne({ _id: id })
         .then(user => {
             if(!user) return res.status(400).json({ error: 'Code is wrong ! ' });
-            user.isActive = false;
+          user.isActive ? (user.isActive = false) :( user.isActive = true) ;
+            console.log(user.isActive )
+            
             user.save();
             res.status(200).json({ message: 'The account is successfully disactivated' });
         })

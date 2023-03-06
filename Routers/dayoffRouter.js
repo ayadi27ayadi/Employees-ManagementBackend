@@ -23,11 +23,11 @@ router.post("/daysOff", isAuth,(req, res, next)=> checkRole(['Super Admin','Dire
  router.delete("/delete/:id", isAuth,(req, res, next)=> checkRole(['Super Admin','Director', 'Administration Director', 'Administration Assistant', 'Team Manager', 'Software Engineer'], req, res, next),
  validatorId , dayoffcontroller.deleteDaysOff);
 /* Delet all Day Off Request */
- router.delete("/deleteAll", isAuth,(req, res, next)=> checkRole(['Super Admin','Director', 'Administration Director', 'Administration Assistant', 'Team Manager', 'Software Engineer'], req, res, next),
+ router.delete("/delete", isAuth,(req, res, next)=> checkRole(['Super Admin','Director', 'Administration Director', 'Administration Assistant', 'Team Manager', 'Software Engineer'], req, res, next),
  dayoffcontroller.deleteAllDaysOff)
  
  /* Update Decision Day Off */
- router.put('/daysOff/decision/:id', isAuth,(req, res, next)=> checkRole(['Director','Team Manager'], req, res, next),
+ router.patch('/daysOff/decision/:id', isAuth,(req, res, next)=> checkRole(['Director','Team Manager'], req, res, next),
   validatorId, validateRequestDecision, dayoffcontroller.UpdateDayOffDecision, dayoffcontroller.statusReq);
 
   /* get All Day Off to the User */

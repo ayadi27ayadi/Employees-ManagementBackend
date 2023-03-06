@@ -10,7 +10,7 @@ import { validateRequestUser } from "../Middelware/validatorRequest.js";
 router.post('/users',isAuth,(req, res, next)=> checkRole(['Super Admin'], req, res, next), validateRequestUser, usercontroller.addUser)
 
 /* route for displaying the information of a user whose identifier is known */
- router.get("/usersById/:id",isAuth,(req, res, next)=> checkRole(['Super Admin'], req, res, next), validorId, usercontroller.getOneUser);
+ router.get("/users/:id",isAuth,(req, res, next)=> checkRole(['Super Admin'], req, res, next), validorId, usercontroller.getOneUser);
 
 /* Recupere ALL User */
 router.get("/users",isAuth,(req, res, next)=> checkRole(['Super Admin'], req, res, next), usercontroller.allUser);
@@ -19,7 +19,7 @@ router.get("/users",isAuth,(req, res, next)=> checkRole(['Super Admin'], req, re
 router.put("/users/:id", isAuth, (req, res, next)=> checkRole(['Super Admin','Director', 'Administration Director', 'Administration Assistant', 'Team Manager', 'Software Enginner'], req, res, next), validorId, usercontroller.updateUser);
 
 /* Delete One User */
-  router.delete("/users/delete/:id",isAuth,(req, res, next)=> checkRole(["Super Admin"], req, res, next), validorId, usercontroller.deleteOneUser);
+  router.delete("/users/:id",isAuth,(req, res, next)=> checkRole(["Super Admin"], req, res, next), validorId, usercontroller.deleteOneUser);
 
 /* Delete All User */
  router.delete("/deletealluser", isAuth,(req, res, next)=> checkRole(["Super Admin"], req, res, next), usercontroller.deleteAllUser);
@@ -28,7 +28,7 @@ router.put("/users/:id", isAuth, (req, res, next)=> checkRole(['Super Admin','Di
 router.post("/verifyuser/:activationcode", usercontroller.verifyUser);
 
 /* Disabled user  */
-router.patch("/users/disable/:id", isAuth,(req, res, next)=> checkRole(['Super Admin'], req, res, next), validorId, usercontroller.disableUser);
+router.patch("/users/toggle-enable/:id", isAuth,(req, res, next)=> checkRole(['Super Admin'], req, res, next), validorId, usercontroller.disableUser);
 
 /* Login */
 router.post("/auth/signin", usercontroller.signin);
